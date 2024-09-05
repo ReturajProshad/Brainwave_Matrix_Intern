@@ -8,7 +8,7 @@ class ThemeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    settingsBox = Hive.box('settings');
+    settingsBox = Hive.box('settings'); //
     IsDark.value = settingsBox.get('isDarkMode',
         defaultValue: false); // Load theme from Hive
   }

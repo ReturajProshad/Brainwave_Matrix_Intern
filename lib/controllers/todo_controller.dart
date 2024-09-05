@@ -27,6 +27,6 @@ class TodoController extends GetxController {
 
   void deleteTodo(int index) {
     todoBox.deleteAt(index); // Remove from Hive
-    todos.removeAt(index);
+    todos.removeAt(index); //
   }
 }

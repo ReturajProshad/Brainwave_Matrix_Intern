@@ -34,11 +34,11 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.dark,
             primarySwatch: Colors.blueGrey,
             cardTheme: CardTheme(
-              color: Colors.grey[850], // Dark theme card color
-              shadowColor: Colors.green, // Dark theme shadow
+              color: Colors.grey[850],
+              shadowColor: Colors.green,
             ),
             listTileTheme: const ListTileThemeData(
-              textColor: Colors.white, // Dark theme text color
+              textColor: Colors.white,
             ),
           ),
           theme: ThemeData(
