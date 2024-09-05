@@ -11,6 +11,6 @@ class TodoModel extends HiveObject {
 
   TodoModel({
     required this.title,
-    this.isCompleted = false,
+    this.isCompleted = false, //
   });
 }
