@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_list_app/controllers/bindings/initialBindings.dart';
 import 'package:todo_list_app/controllers/theme_controller.dart';
+import 'package:todo_list_app/models/todoModel.dart';
 import 'package:todo_list_app/view/homepage.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Hive and open a box for todos and settings
+  await Hive.initFlutter();
+  Hive.registerAdapter(TodoModelAdapter());
+
+  await Hive.openBox<TodoModel>('todos'); // Box for storing todos
+  await Hive.openBox('settings'); // Box for storing app settings like theme
   runApp(MyApp());
 }
 
