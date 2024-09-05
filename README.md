@@ -3,6 +3,7 @@
 A new Flutter project.
 
 ## structure
+```
 lib/
 ├── controllers/
 │   ├── todo_controller.dart
