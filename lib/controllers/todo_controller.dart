@@ -1,22 +1,32 @@
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:todo_list_app/models/todoModel.dart';
 
 class TodoController extends GetxController {
-  var todos = <Todomodel>[].obs;
+  var todos = <TodoModel>[].obs;
+  late Box<TodoModel> todoBox;
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    todoBox = Hive.box<TodoModel>('todos');
+    todos.addAll(todoBox.values);
+  }
 
   void addTodo(String _title) {
-    todos.add(
-      Todomodel(title: _title),
-    );
+    final newTodo = TodoModel(title: _title);
+    todos.add(newTodo);
+    todoBox.add(newTodo);
   }
 
   void todoStatus(int index) {
-    var todo = todos[index];
-    todo.isCompleted = !todo.isCompleted;
-    todos[index] = todo;
+    todos[index].isCompleted = !todos[index].isCompleted;
+    todos[index].save(); // Update Hive data
+    todos.refresh();
   }
 
   void deleteTodo(int index) {
+    todoBox.deleteAt(index); // Remove from Hive
     todos.removeAt(index);
   }
 }
