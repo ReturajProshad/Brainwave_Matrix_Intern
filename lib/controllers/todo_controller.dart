@@ -22,7 +22,15 @@ class TodoController extends GetxController {
 
   void todoStatus(int index) {
     todos[index].isCompleted = !todos[index].isCompleted;
+    todos[index].isInProgress = false; //if completed then not in progress
     todos[index].save(); // Update Hive data
+    todos.refresh();
+  }
+
+  void markInProgress(int index) {
+    todos[index].isInProgress = !todos[index].isInProgress;
+    todos[index].isCompleted = false; // if in progress then not completed
+    todos[index].save();
     todos.refresh();
   }
 
