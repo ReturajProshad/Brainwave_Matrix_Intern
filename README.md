@@ -7,17 +7,6 @@ using MVC Architecture
 ```
 lib/
 ├── controllers/
-<<<<<<< HEAD
-│   ├── todo_controller.dart
-│   └── theme_controller.dart
-├── models/
-│   └── todo.dart
-├── views/
-│   └── home_page.dart
-└── main.dart
-
-
-=======
 |    ├── bindings/
 │    |       └── initialBindings.dart  
 │    ├── todo_controller.dart
@@ -83,4 +72,3 @@ The app logic is separated into models, views, and controllers, allowing each co
 As the app grows, new features can easily be added to each layer without affecting others.
 ### Reactive UI: 
 With GetX, the controllers react to changes in the model, and the views are updated accordingly without any boilerplate code.
->>>>>>> 48b7a5665af3a7ea1a2f2025e6653e2df7da1f16
