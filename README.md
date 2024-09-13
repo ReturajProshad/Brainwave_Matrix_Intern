@@ -8,34 +8,43 @@ using MVC Architecture
 lib/
 ├── controllers/
 |    ├── bindings/
-│    |       └── initialBindings.dart  
+│    |       └── initialBindings.dart
+|    ├── constants.dart
 │    ├── todo_controller.dart
 │    └── theme_controller.dart
 ├── models/
 │   ├── todoModel.dart
 |   └── todoModel.g.dart
 ├── views/
-│   └── home_page.dart
+│   ├── home_page.dart
+│   ├── enter_user_name.dart
+│   └── splash_screen.dart
 └── main.dart
 ```
 ## Project Overview
 
 https://github.com/user-attachments/assets/23043070-1a8e-4b4b-964c-4626c9c72fdc
 
+## Project Overview 
+
+video will be comming soon
+
 ### Description:
-The Todo List App is a mobile application designed to help users organize their tasks efficiently while providing a seamless and responsive user interface. The app offers functionality to add, edit, mark, and delete todos. It also allows users to switch between light and dark themes, with both their tasks and theme preferences being stored in local storage using Hive. This ensures that all data, including todos and the selected theme, persists across app restarts.
+The Todo List App is a mobile application designed to help users efficiently manage and organize their tasks while providing an intuitive, responsive, and visually appealing user interface. The app allows users to add, edit, mark as in-progress or completed, and delete todos, with seamless functionality. In addition, it supports light and dark themes, with user preferences and todos stored persistently in local storage using Hive. This ensures that all data remains intact across app restarts, offering a smooth and consistent experience.
 
 ## Key Features:
 ##### Add Todos: 
-Users can add new tasks to their todo list.
-##### Mark as Completed: 
-Tasks can be marked as completed or pending with a simple tap.
+Users can add new tasks to their todo list, which are categorized under various statuses such as "In Progress," "Completed," or "Not Started."
+##### Mark as In Progress/Completed: 
+Tasks can be marked as "In Progress" or "Completed" with an easy toggle, giving users control over their task status.
 ##### Delete Todos: 
-Completed or unwanted tasks can be removed.
+Unwanted or completed tasks can be removed quickly with a delete button for efficient task management.
 ##### Persistent Local Storage: 
 All todos are stored locally using Hive, ensuring data persists even after the app is closed.
-##### Theme Support: 
-The app supports both light and dark themes. Users can toggle the theme, and their preference is saved locally using Hive.
+##### Dynamic Theme Support:
+The app offers light and dark mode themes that users can easily switch between. The selected theme is saved using Hive, ensuring preferences are maintained across sessions.
+##### Responsive UI with Visual Feedback:
+The user interface adapts dynamically to different screen sizes and task states. When no todos are available, the app displays visual feedback, such as relevant images indicating the empty state of each category (e.g., "All Todos" or "Completed").
 ##### Smooth State Management: 
 State management is handled using GetX, which ensures a reactive UI and clean separation of logic.
 #### Fast and Lightweight Storage: 
