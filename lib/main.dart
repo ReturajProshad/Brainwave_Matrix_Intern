@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_list_app/controllers/bindings/initialBindings.dart';
+import 'package:todo_list_app/controllers/constants.dart';
 import 'package:todo_list_app/controllers/theme_controller.dart';
 import 'package:todo_list_app/models/todoModel.dart';
-import 'package:todo_list_app/view/homepage.dart';
+import 'package:todo_list_app/view/splash_screen_and_user_name.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +15,10 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TodoModelAdapter());
 
-  await Hive.openBox<TodoModel>('todos'); // Box for storing todos
-  await Hive.openBox('settings'); // Box for storing app settings like theme
+  await Hive.openBox<TodoModel>(
+      constants.instance.todosHive); // Box for storing todos
+  await Hive.openBox(constants.instance
+      .settingsHive); // Box for storing app settings like theme & User name
   runApp(MyApp());
 }
 
@@ -29,7 +32,7 @@ class MyApp extends StatelessWidget {
           title: 'TODO  LIST',
           themeMode:
               _themeController.IsDark.value ? ThemeMode.dark : ThemeMode.light,
-          home: Homepage(),
+          home: splashScreen(),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             primarySwatch: Colors.blueGrey,

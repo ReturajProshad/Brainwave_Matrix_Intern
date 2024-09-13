@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/controllers/constants.dart';
 import 'package:todo_list_app/controllers/theme_controller.dart';
 import 'package:get/get.dart';
 import 'package:todo_list_app/controllers/todo_controller.dart';
@@ -13,7 +14,7 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("TODO List App"),
+        title: Text("HI ${constants.instance.user_Name}"),
         backgroundColor: Colors.blue,
         actions: [
           Obx(() => IconButton(

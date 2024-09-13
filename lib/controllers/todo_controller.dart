@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:todo_list_app/controllers/constants.dart';
 import 'package:todo_list_app/models/todoModel.dart';
 
 class TodoController extends GetxController {
@@ -9,7 +10,7 @@ class TodoController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    todoBox = Hive.box<TodoModel>('todos');
+    todoBox = Hive.box<TodoModel>(constants.instance.todosHive);
     todos.addAll(todoBox.values);
   }
 
