@@ -21,13 +21,15 @@ lib/
 │   └── splash_screen.dart
 └── main.dart
 ```
-## Project Overview
+## Project Overview (version -1)
 
 https://github.com/user-attachments/assets/23043070-1a8e-4b4b-964c-4626c9c72fdc
 
-## Project Overview 
+## Project Overview (version -2)
 
-video will be comming soon
+
+https://github.com/user-attachments/assets/0dc8c564-16c1-4324-9390-c2d03d63e623
+
 
 ### Description:
 The Todo List App is a mobile application designed to help users efficiently manage and organize their tasks while providing an intuitive, responsive, and visually appealing user interface. The app allows users to add, edit, mark as in-progress or completed, and delete todos, with seamless functionality. In addition, it supports light and dark themes, with user preferences and todos stored persistently in local storage using Hive. This ensures that all data remains intact across app restarts, offering a smooth and consistent experience.
