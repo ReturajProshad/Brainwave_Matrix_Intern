@@ -3,6 +3,7 @@ import 'package:news_app_with_rest_api/model/articleModel.dart';
 import 'package:news_app_with_rest_api/services/News_api_service.dart';
 
 class NewsProvider with ChangeNotifier {
+  static NewsProvider instance = NewsProvider();
   List<Article> _articles = [];
   bool _loading = true;
 

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_with_rest_api/customWidgets/constants.dart';
+import 'package:news_app_with_rest_api/provider/news_provider.dart';
+import 'package:provider/provider.dart';
 
 class Customappbar extends StatelessWidget implements PreferredSizeWidget {
   final String headings;
   Customappbar({super.key, required this.headings});
-  List<Color> _gradient = [Colors.blue, Colors.purple];
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: _gradient,
+            colors: Constants.instants.gradient,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
@@ -22,6 +25,29 @@ class Customappbar extends StatelessWidget implements PreferredSizeWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        leading: IconButton(
+          onPressed: Scaffold.of(context).openDrawer,
+          icon: Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Provider.of<NewsProvider>(context, listen: false).fetchNews();
+              },
+              icon: Icon(
+                Icons.refresh,
+                color: Colors.black,
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.black,
+              ))
+        ],
       ),
     );
   }
