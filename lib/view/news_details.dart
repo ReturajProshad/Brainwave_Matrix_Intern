@@ -22,14 +22,14 @@ class NewsDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               article.description,
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
           ),
           ElevatedButton(
             onPressed: () {
               // Launch the news article URL in the browser
             },
-            child: Text('Read Full Article'),
+            child: const Text('Read Full Article'),
           ),
         ],
       ),

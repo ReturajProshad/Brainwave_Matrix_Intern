@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_with_rest_api/customWidgets/CustomAppbar.dart';
 import 'package:news_app_with_rest_api/customWidgets/constants.dart';
+import 'package:news_app_with_rest_api/customWidgets/drawer.dart';
 import 'package:news_app_with_rest_api/model/articleModel.dart';
 import 'package:news_app_with_rest_api/provider/news_provider.dart';
 import 'package:news_app_with_rest_api/view/news_details.dart';
+import 'package:news_app_with_rest_api/view/webview/readFullArticle.dart';
 import 'package:provider/provider.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -12,10 +14,10 @@ class NewsScreen extends StatelessWidget {
     final newsProvider = Provider.of<NewsProvider>(context);
 
     return Scaffold(
-      appBar: Customappbar(headings: "Top Headlines"),
-      drawer: _myDrawer(context),
+      appBar: Customappbar(headings: Constants.instants.fromTopHome),
+      drawer: MyDrawer(),
       body: newsProvider.loading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: newsProvider.articles.length,
               itemBuilder: (context, index) {
@@ -42,7 +44,7 @@ class NewsScreen extends StatelessWidget {
           : Container(
               width: 100,
               color: Colors.grey,
-              child: Text(
+              child: const Text(
                 "No Image Found",
                 style: TextStyle(color: Colors.red),
               ),
@@ -54,10 +56,10 @@ class NewsScreen extends StatelessWidget {
         ),
         color: Colors.white,
         child: Padding(
-          padding: EdgeInsets.all(1.0),
+          padding: const EdgeInsets.all(1.0),
           child: Text(
             article.title,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: Colors.black,
@@ -75,82 +77,13 @@ class NewsScreen extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NewsDetailScreen(article: article),
+            builder: (context) => ReadFullArticle(
+              articleURL: article.url,
+              Title: article.title,
+            ),
           ),
         );
       },
-    );
-  }
-
-  Widget _myDrawer(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: Constants.instants.gradient,
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundImage: NetworkImage(Constants.instants.DrawerImage),
-                ),
-                SizedBox(height: 10),
-                const Text(
-                  'Welcome!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.home, color: Colors.blue),
-            title: Text('Home'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.category, color: Colors.orange),
-            title: Text('Categories'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.bookmark, color: Colors.red),
-            title: Text('Bookmarks'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings, color: Colors.green),
-            title: Text('Settings'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.logout, color: Colors.grey),
-            title: Text('Logout'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
     );
   }
 }

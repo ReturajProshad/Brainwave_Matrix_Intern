@@ -21,29 +21,31 @@ class Customappbar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         title: Text(
           headings,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
           onPressed: Scaffold.of(context).openDrawer,
-          icon: Icon(
+          icon: const Icon(
             Icons.menu,
             color: Colors.black,
           ),
         ),
         actions: [
-          IconButton(
-              onPressed: () {
-                Provider.of<NewsProvider>(context, listen: false).fetchNews();
-              },
-              icon: Icon(
-                Icons.refresh,
-                color: Colors.black,
-              )),
+          if (headings == Constants.instants.fromTopHome) ...[
+            IconButton(
+                onPressed: () {
+                  Provider.of<NewsProvider>(context, listen: false).fetchNews();
+                },
+                icon: const Icon(
+                  Icons.refresh,
+                  color: Colors.black,
+                ))
+          ],
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications,
                 color: Colors.black,
               ))
@@ -53,5 +55,5 @@ class Customappbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
