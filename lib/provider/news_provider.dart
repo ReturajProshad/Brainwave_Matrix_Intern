@@ -8,7 +8,7 @@ class NewsProvider with ChangeNotifier {
   static NewsProvider instance = NewsProvider();
   List<Article> _articles = [];
   bool _loading = true;
-  List<Bookmarkmodel> addToBookMarkList = [];
+  Set<Bookmarkmodel> addToBookMarkList = {};
   //change this heading during transformation
   String currentHeading = Constants.instants.fromTopHome;
 
@@ -61,6 +61,11 @@ class NewsProvider with ChangeNotifier {
   void addToBookMark(String Title, String url, String imageToUrl) {
     addToBookMarkList.add(Bookmarkmodel(Title, url, imageToUrl));
     // print(_addToBookMark[0].title);
+    notifyListeners();
+  }
+
+  void deleteBookmark(Bookmarkmodel bookmark) {
+    addToBookMarkList.remove(bookmark);
     notifyListeners();
   }
 }

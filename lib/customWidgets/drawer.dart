@@ -94,7 +94,10 @@ class MyDrawer extends StatelessWidget {
                     .updateHeading('Categories');
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BookmarkScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => BookmarkScreen(
+                            comeFrom: _currentheading,
+                          )),
                 );
               }
             },
