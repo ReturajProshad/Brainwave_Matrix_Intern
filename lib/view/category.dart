@@ -35,20 +35,18 @@ class CategoryPage extends StatelessWidget {
               end: Alignment.bottomRight,
             ),
           ),
-          child: Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _Categories('Business', Icons.business, context),
-                _Categories('Education', Icons.business, context),
-                _Categories('Weather', Icons.business, context),
-                _Categories('Feature', Icons.business, context),
-                _Categories('Sports', Icons.business, context),
-                _Categories('Entertainment', Icons.business, context),
-                _Categories('Politics', Icons.business, context),
-              ],
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _Categories('Business', Icons.business, context),
+              _Categories('Education', Icons.business, context),
+              _Categories('Weather', Icons.business, context),
+              _Categories('Feature', Icons.business, context),
+              _Categories('Sports', Icons.business, context),
+              _Categories('Entertainment', Icons.business, context),
+              _Categories('Politics', Icons.business, context),
+            ],
           ),
         ),
       ),

@@ -10,27 +10,43 @@ import 'package:provider/provider.dart';
 
 class NewsScreen extends StatelessWidget {
   String comeFrom;
+
   NewsScreen({required this.comeFrom});
   @override
   Widget build(BuildContext context) {
+    // print('come=$comeFrom');
     final newsProvider = Provider.of<NewsProvider>(context);
 
-    return Scaffold(
-      appBar: Customappbar(headings: newsProvider.currentHeading),
-      drawer: MyDrawer(),
-      body: newsProvider.loading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: newsProvider.articles.length,
-              itemBuilder: (context, index) {
-                final article = newsProvider.articles[index];
-                // print(article.urlToImage);
-                //if (article.urlToImage != '') {
-                return _ListTile(article, context);
-                //} else
-                //  return Container();
-              },
-            ),
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          Provider.of<NewsProvider>(context, listen: false)
+              .updateHeading(comeFrom);
+          if (comeFrom != '' && comeFrom != Constants.instants.fromCateGory) {
+            Provider.of<NewsProvider>(context, listen: false).loadArticles();
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: Customappbar(headings: newsProvider.currentHeading),
+        drawer: MyDrawer(),
+        backgroundColor:
+            Constants.instants.backgroundColor(newsProvider.currentHeading),
+        body: newsProvider.loading
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: newsProvider.articles.length,
+                itemBuilder: (context, index) {
+                  final article = newsProvider.articles[index];
+                  // print(article.urlToImage);
+                  //if (article.urlToImage != '') {
+                  return _ListTile(article, context);
+                  //} else
+                  //  return Container();
+                },
+              ),
+      ),
     );
   }
 
@@ -82,6 +98,7 @@ class NewsScreen extends StatelessWidget {
             builder: (context) => ReadFullArticle(
               articleURL: article.url,
               Title: article.title,
+              ImageToUrl: article.urlToImage,
             ),
           ),
         );

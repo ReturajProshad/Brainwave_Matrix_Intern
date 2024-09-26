@@ -5,7 +5,15 @@ import 'package:provider/provider.dart';
 
 class Customappbar extends StatelessWidget implements PreferredSizeWidget {
   final String headings;
-  Customappbar({super.key, required this.headings});
+  final where;
+  final url;
+  final ImageToUrl;
+  Customappbar(
+      {super.key,
+      required this.headings,
+      this.where,
+      this.url,
+      this.ImageToUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +51,19 @@ class Customappbar extends StatelessWidget implements PreferredSizeWidget {
                   color: Colors.black,
                 ))
           ],
+          if (where == "W") ...[
+            IconButton(
+              onPressed: () {
+                Provider.of<NewsProvider>(context, listen: false)
+                    .addToBookMark(headings, url, ImageToUrl);
+                showBookmarkAddedSnackbar(context);
+              },
+              icon: const Icon(
+                Icons.bookmark_add,
+                color: Colors.black,
+              ),
+            )
+          ],
           IconButton(
               onPressed: () {},
               icon: const Icon(
@@ -56,4 +77,35 @@ class Customappbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  //Custom Snackbar
+  void showBookmarkAddedSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: const Row(
+        children: [
+          Icon(Icons.bookmark, color: Colors.white),
+          SizedBox(width: 10),
+          Text(
+            'Bookmark added!',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+        ],
+      ),
+      backgroundColor: Colors.greenAccent.shade700,
+      duration: const Duration(seconds: 3),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      action: SnackBarAction(
+        label: 'Undo',
+        textColor: Colors.white,
+        onPressed: () {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        },
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }

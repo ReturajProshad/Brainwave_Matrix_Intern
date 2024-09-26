@@ -1,8 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:news_app_with_rest_api/customWidgets/constants.dart';
 import 'package:news_app_with_rest_api/provider/news_provider.dart';
 import 'package:news_app_with_rest_api/view/category.dart';
+import 'package:news_app_with_rest_api/view/news_screen.dart';
+import 'package:news_app_with_rest_api/view/show_bookmarks.dart';
 import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -47,6 +50,20 @@ class MyDrawer extends StatelessWidget {
             title: const Text('Home'),
             onTap: () {
               Navigator.pop(context);
+              if (_currentheading != Constants.instants.fromTopHome) {
+                Provider.of<NewsProvider>(context, listen: false)
+                    .updateHeading(Constants.instants.fromTopHome);
+                Provider.of<NewsProvider>(context, listen: false)
+                    .loadArticles();
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewsScreen(
+                        comeFrom: _currentheading,
+                      ),
+                    ));
+              }
             },
           ),
           ListTile(
@@ -72,6 +89,14 @@ class MyDrawer extends StatelessWidget {
             title: const Text('Bookmarks'),
             onTap: () {
               Navigator.pop(context);
+              if (_currentheading != 'Bookmarks') {
+                Provider.of<NewsProvider>(context, listen: false)
+                    .updateHeading('Categories');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BookmarkScreen()),
+                );
+              }
             },
           ),
           ListTile(
@@ -83,9 +108,9 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.logout, color: Colors.grey),
-            title: const Text('Logout'),
+            title: const Text('Exit'),
             onTap: () {
-              Navigator.pop(context);
+              SystemNavigator.pop();
             },
           ),
         ],

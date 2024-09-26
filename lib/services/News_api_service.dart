@@ -25,7 +25,7 @@ class NewsService {
     final url = Uri.parse('$_baseUrl/everything?q=$_catName&apiKey=$_apiKey');
     final response = await http.get(url);
     if (response.statusCode == 200) {
-      print(response.body);
+      //print(response.body);
       final Map<String, dynamic> json = jsonDecode(response.body);
       final List<dynamic> articlejson = json['articles'];
       return articlejson.map((json) => Article.fromJson(json)).toList();

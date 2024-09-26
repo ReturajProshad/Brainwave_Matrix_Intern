@@ -6,7 +6,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 class ReadFullArticle extends StatefulWidget {
   final String articleURL;
   final String Title;
-  ReadFullArticle({super.key, required this.articleURL, required this.Title});
+  final String ImageToUrl;
+  ReadFullArticle(
+      {super.key,
+      required this.articleURL,
+      required this.Title,
+      required this.ImageToUrl});
 
   @override
   State<ReadFullArticle> createState() => _ReadFullArticleState();
@@ -53,6 +58,9 @@ class _ReadFullArticleState extends State<ReadFullArticle> {
       drawer: MyDrawer(),
       appBar: Customappbar(
         headings: widget.Title,
+        where: 'W',
+        url: widget.articleURL,
+        ImageToUrl: widget.ImageToUrl,
       ),
       body: WebViewWidget(
         controller: _controller,

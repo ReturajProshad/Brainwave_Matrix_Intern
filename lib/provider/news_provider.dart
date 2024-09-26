@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_with_rest_api/customWidgets/constants.dart';
 import 'package:news_app_with_rest_api/model/articleModel.dart';
+import 'package:news_app_with_rest_api/model/bookmarkModel.dart';
 import 'package:news_app_with_rest_api/services/News_api_service.dart';
 
 class NewsProvider with ChangeNotifier {
   static NewsProvider instance = NewsProvider();
   List<Article> _articles = [];
   bool _loading = true;
-
+  List<Bookmarkmodel> addToBookMarkList = [];
   //change this heading during transformation
   String currentHeading = Constants.instants.fromTopHome;
 
@@ -22,6 +23,7 @@ class NewsProvider with ChangeNotifier {
   NewsProvider() {
     loadArticles();
   }
+
   void loadArticles() {
     if (currentHeading == Constants.instants.fromTopHome) {
       fetchNews();
@@ -54,5 +56,11 @@ class NewsProvider with ChangeNotifier {
       _loading = false;
       notifyListeners();
     }
+  }
+
+  void addToBookMark(String Title, String url, String imageToUrl) {
+    addToBookMarkList.add(Bookmarkmodel(Title, url, imageToUrl));
+    // print(_addToBookMark[0].title);
+    notifyListeners();
   }
 }
