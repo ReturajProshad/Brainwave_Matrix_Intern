@@ -6,8 +6,9 @@ class Constants {
   List<Color> gradient = [Colors.blue, Colors.purple];
   String DrawerImage =
       "https://cdn.pixabay.com/photo/2015/05/31/12/12/coffee-791439_1280.jpg";
-  String fromTopHome = "Top Headlines";
 
+  String fromTopHome = "Top Headlines";
+  String fromCateGory = "Categories";
   //category body color
   List<Color> catColor = [
     Colors.blue,

@@ -20,7 +20,14 @@ class NewsProvider with ChangeNotifier {
   bool get loading => _loading;
 
   NewsProvider() {
-    fetchNews();
+    loadArticles();
+  }
+  void loadArticles() {
+    if (currentHeading == Constants.instants.fromTopHome) {
+      fetchNews();
+    } else if (currentHeading != Constants.instants.fromCateGory) {
+      fetchCategory(currentHeading);
+    }
   }
 
   Future<void> fetchNews() async {
@@ -28,6 +35,19 @@ class NewsProvider with ChangeNotifier {
       _loading = true;
       notifyListeners();
       _articles = await NewsService().fetchTopHeadlines();
+    } catch (e) {
+      print(e);
+    } finally {
+      _loading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> fetchCategory(String _title) async {
+    try {
+      _loading = true;
+      notifyListeners();
+      _articles = await NewsService().fetchByCategory(_title);
     } catch (e) {
       print(e);
     } finally {

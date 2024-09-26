@@ -9,12 +9,14 @@ import 'package:news_app_with_rest_api/view/webview/readFullArticle.dart';
 import 'package:provider/provider.dart';
 
 class NewsScreen extends StatelessWidget {
+  String comeFrom;
+  NewsScreen({required this.comeFrom});
   @override
   Widget build(BuildContext context) {
     final newsProvider = Provider.of<NewsProvider>(context);
 
     return Scaffold(
-      appBar: Customappbar(headings: Constants.instants.fromTopHome),
+      appBar: Customappbar(headings: newsProvider.currentHeading),
       drawer: MyDrawer(),
       body: newsProvider.loading
           ? const Center(child: CircularProgressIndicator())
@@ -22,7 +24,7 @@ class NewsScreen extends StatelessWidget {
               itemCount: newsProvider.articles.length,
               itemBuilder: (context, index) {
                 final article = newsProvider.articles[index];
-                print(article.urlToImage);
+                // print(article.urlToImage);
                 //if (article.urlToImage != '') {
                 return _ListTile(article, context);
                 //} else

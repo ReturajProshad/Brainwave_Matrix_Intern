@@ -53,6 +53,7 @@ class MyDrawer extends StatelessWidget {
             leading: const Icon(Icons.category, color: Colors.orange),
             title: const Text('Categories'),
             onTap: () {
+              Navigator.pop(context);
               if (_currentheading != "Categories") {
                 Provider.of<NewsProvider>(context, listen: false)
                     .updateHeading('Categories');
